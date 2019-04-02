@@ -24,6 +24,7 @@ public class Handler {
         return request.body(BodyExtractors.toMono(User.class))
             .flatMap(user -> service.save(user))
             .flatMap(user -> created(URI.create("/users/" + user.getId()))
+                .contentType(MediaType.APPLICATION_JSON)    
                 .body(fromObject(user)));
     }
 
@@ -38,6 +39,17 @@ public class Handler {
         return ok()
             .contentType(MediaType.APPLICATION_JSON)
             .body(service.findById(request.pathVariable("id")), User.class);
-            
+    }
+
+    public Mono<ServerResponse> update(ServerRequest request) {
+        return request.body(BodyExtractors.toMono(User.class))
+            .flatMap(user -> service.update(request.pathVariable("id"), user))
+            .flatMap(user -> ok().body(fromObject(user)));
+    }
+
+    public Mono<ServerResponse> delete(ServerRequest request) {
+        return ok()
+        .contentType(MediaType.APPLICATION_JSON)
+        .body(service.delete(request.pathVariable("id")), User.class);
     }
 }
