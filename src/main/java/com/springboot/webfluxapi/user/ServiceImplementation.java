@@ -10,21 +10,38 @@ import reactor.core.publisher.Mono;
 public class ServiceImplementation implements IService {
 
     @Autowired
-    IRepository userRepository;
+    IRepository repository;
 
     @Override
     public Flux<User> findAll() {
-        return userRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public Mono<User> findById(String id) {
-        return userRepository.findById(id);
+        return repository.findById(id);
     }
 
     @Override
     public Mono<User> save(User user) {
-        return userRepository.save(user);
+        return repository.save(user);
     }
 
+    @Override 
+    public Mono<User> update(String id, User user) {
+        return repository
+            .findById(id)
+            .map(u -> {
+                u.setName(user.getName());
+                return u;
+            })
+            .flatMap(u -> repository.save(u));
+    }
+
+    @Override
+    public Mono<User> delete(String id) {
+        return repository
+            .findById(id)
+            .flatMap(user -> repository.deleteById(id).thenReturn(user));
+    }
 }

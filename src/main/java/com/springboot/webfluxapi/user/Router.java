@@ -2,6 +2,8 @@ package com.springboot.webfluxapi.user;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
+import static org.springframework.web.reactive.function.server.RequestPredicates.PUT;
+import static org.springframework.web.reactive.function.server.RequestPredicates.DELETE;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 
 import org.springframework.context.annotation.Bean;
@@ -19,6 +21,8 @@ public class Router {
         return RouterFunctions
             .route(POST("/users").and(accept(MediaType.APPLICATION_JSON)), handler::create)
             .andRoute(GET("/users").and(accept(MediaType.APPLICATION_JSON)), handler::retrieve)
-            .andRoute(GET("/users/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::findById);
+            .andRoute(GET("/users/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::findById)
+            .andRoute(PUT("/users/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::update)
+            .andRoute(DELETE("/users/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::delete);
     }
 }
