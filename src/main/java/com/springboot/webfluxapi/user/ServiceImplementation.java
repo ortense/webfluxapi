@@ -1,7 +1,4 @@
-package com.springboot.webfluxapi.services;
-
-import com.springboot.webfluxapi.document.User;
-import com.springboot.webfluxapi.repository.IUserRepository;
+package com.springboot.webfluxapi.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,10 +7,10 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class UserService implements IUserService {
+public class ServiceImplementation implements IService {
 
     @Autowired
-    IUserRepository userRepository;
+    IRepository userRepository;
 
     @Override
     public Flux<User> findAll() {

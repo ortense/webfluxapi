@@ -2,8 +2,8 @@ package com.springboot.webfluxapi;
 
 import java.util.UUID;
 
-import com.springboot.webfluxapi.document.User;
-import com.springboot.webfluxapi.repository.IUserRepository;
+import com.springboot.webfluxapi.user.IRepository;
+import com.springboot.webfluxapi.user.User;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -12,9 +12,9 @@ import reactor.core.publisher.Flux;
 
 @Component
 public class DummyData implements CommandLineRunner {
-    private final IUserRepository userRepository;
+    private final IRepository userRepository;
 
-    DummyData(IUserRepository userRepository) {
+    DummyData(IRepository userRepository) {
         this.userRepository = userRepository;
     }
 

@@ -1,11 +1,9 @@
-package com.springboot.webfluxapi.services;
-
-import com.springboot.webfluxapi.document.User;
+package com.springboot.webfluxapi.user;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface IUserService {
+public interface IService {
     Flux<User> findAll();
     Mono<User> findById(String id);
     Mono<User> save(User user);
