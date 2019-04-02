@@ -49,7 +49,7 @@ public class Handler {
 
     public Mono<ServerResponse> delete(ServerRequest request) {
         return ok()
-        .contentType(MediaType.APPLICATION_JSON)
-        .body(service.delete(request.pathVariable("id")), User.class);
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(service.delete(request.pathVariable("id")), User.class);
     }
 }
