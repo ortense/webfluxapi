@@ -1,7 +1,10 @@
-package com.springboot.webfluxapi;
+package com.springboot.webfluxapi.user;
 
-import com.springboot.webfluxapi.document.User;
-import com.springboot.webfluxapi.services.IUserService;
+import static org.springframework.web.reactive.function.BodyInserters.fromObject;
+import static org.springframework.web.reactive.function.server.ServerResponse.created;
+import static org.springframework.web.reactive.function.server.ServerResponse.ok;
+
+import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,18 +13,12 @@ import org.springframework.web.reactive.function.BodyExtractors;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import static org.springframework.web.reactive.function.server.ServerResponse.ok;
-import static org.springframework.web.reactive.function.server.ServerResponse.created;
-import static org.springframework.web.reactive.function.BodyInserters.fromObject;
-
-import java.net.URI;
-
 import reactor.core.publisher.Mono;
 
 @Component
-public class UserHandler {
+public class Handler {
     @Autowired
-    IUserService service;
+    IService service;
 
     public Mono<ServerResponse> create(ServerRequest request) {
         return request.body(BodyExtractors.toMono(User.class))
