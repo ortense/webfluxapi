@@ -17,7 +17,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 @Component
-public class Handler {
+public class UserHandler {
     @Autowired
     IService service;
 

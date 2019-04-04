@@ -7,7 +7,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class ServiceImplementation implements IService {
+public class UserServiceImplementation implements IService {
 
     @Autowired
     IRepository repository;
