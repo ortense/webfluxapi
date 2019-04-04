@@ -9,12 +9,12 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class ServiceImplementation implements IService {
+public class GithubRepoServiceImplementation implements IService {
     
     private final WebClient client;
 
     @Autowired
-    public ServiceImplementation() {
+    public GithubRepoServiceImplementation() {
         this.client = WebClient.create("https://api.github.com/");
     }
 
@@ -24,13 +24,16 @@ public class ServiceImplementation implements IService {
 
     @Override
     public Flux<GithubRepo> findByOwnerName(String ownerName) {
-        return this.apiGet("/users/" + ownerName + "/repos")
-            .flatMapMany(response -> response.bodyToFlux(GithubRepo.class));
+        Mono<ClientResponse> apiGet = this.apiGet("/users/" + ownerName + "/repos");
+        return apiGet
+            .flatMapMany(response -> response.statusCode().value() == 200
+                ? response.bodyToFlux(GithubRepo.class)
+                : Flux.just());
     }
 
     @Override
     public Mono<GithubRepo> findByRepoName(String ownerName, String repoName) {
-        return this.apiGet("/users/" + ownerName + "/repos/" + repoName)
+        return this.apiGet("/repos/" + ownerName + "/" + repoName)
             .flatMap(response -> response.bodyToMono(GithubRepo.class));
     }
 

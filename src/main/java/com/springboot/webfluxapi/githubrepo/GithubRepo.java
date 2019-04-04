@@ -7,7 +7,7 @@ public class GithubRepo {
     
     String name;
     
-    String descripion;
+    String description;
     
     String language;
    
@@ -46,17 +46,17 @@ public class GithubRepo {
     }
 
     /**
-     * @return the descripion
+     * @return the description
      */
-    public String getDescripion() {
-        return descripion;
+    public String getDescription() {
+        return description;
     }
 
     /**
-     * @param descripion the descripion to set
+     * @param description the description to set
      */
-    public void setDescripion(String descripion) {
-        this.descripion = descripion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
