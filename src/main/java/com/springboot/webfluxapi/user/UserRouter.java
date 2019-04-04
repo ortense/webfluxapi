@@ -14,15 +14,15 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 @Configuration
-public class Router {
+public class UserRouter {
 
     @Bean
-    public RouterFunction<ServerResponse> createUserRouter(Handler handler) {
+    public RouterFunction<ServerResponse> createUserRouter(UserHandler handler) {
         return RouterFunctions
             .route(POST("/users").and(accept(MediaType.APPLICATION_JSON)), handler::create)
-            .andRoute(GET("/users").and(accept(MediaType.APPLICATION_JSON)), handler::retrieve)
-            .andRoute(GET("/users/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::findById)
+            .andRoute(GET("/users"), handler::retrieve)
+            .andRoute(GET("/users/{id}"), handler::findById)
             .andRoute(PUT("/users/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::update)
-            .andRoute(DELETE("/users/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::delete);
+            .andRoute(DELETE("/users/{id}"), handler::delete);
     }
 }
